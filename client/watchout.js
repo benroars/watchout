@@ -67,18 +67,6 @@
       return d;
     })
     .attr('r', '15')
-    // .attr('stroke', 'white')
-    //      .attr('stroke-width', '3');
-  //  .attr('xlink:href', './asteroid.png')
- //   .attr('x', function(d) {
- //     var x = Math.random() * 400;
- //     return x + 'px';
-  //  })
-  //  .attr('y', function(d) {
-  //    var y = Math.random() * 400;
-   //   return y + 'px';
-  //  })
-    //.style('fill', 'red');
     .style('fill', 'url(#image)')
     .attr('class', 'spin');
 
@@ -125,23 +113,6 @@
       return collisions;
     });    
   
-  // setInterval(function() {
-  //   asteroid.transition().duration(1200)
-
-  //   .attr('x', function(d) {
-  //     var x = Math.random() * 400;
-  //     //console.log(this.x.baseVal.value);
-  //     //console.log(this); 
-
-  //     return x + 'px';
-  //   })
-  //   .attr('y', function(d) {
-  //     var y = Math.random() * 400;
-  //     return y + 'px';
-  //   });
-
-  // }, 1500);
-
 
   var move = function() {
     var astAtt = asteroid
@@ -175,7 +146,7 @@
           dy = thisCircle.attr('cy') - otherCircle.attr('cy'),
           distance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
 
-          if (distance < +thisCircle.attr('r') + +otherCircle.attr('r')) {
+          if (distance < Number(thisCircle.attr('r')) + Number(otherCircle.attr('r'))) {
             collision(thisCircle, otherCircle);
           }
         }
