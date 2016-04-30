@@ -27,34 +27,34 @@
          .append('svg:image')
          .attr('x', '0')
          .attr('y', '0')
-         .attr('width', '50')
-         .attr('height', '50')
-         .attr('xlink:href', './asteroid.png');
+         .attr('width', '38')
+         .attr('height', '38')
+         .attr('xlink:href', './sken.gif');
 
-  var data = [100, 200, 300, 400, 500];
+
+  var pattern2 = svg.selectAll('pattern')
+     .data([1, 2])
+     .enter()
+     .append('pattern')
+     .attr('x', '0')
+     .attr('y', '0')
+     .attr('id', 'image2')
+     .attr('height', '50')
+     .attr('width', '50');
+
+  pattern2.selectAll('image')
+         .data([1])
+         .enter()
+         .append('svg:image')
+         .attr('x', '0')
+         .attr('y', '0')
+         .attr('width', '32')
+         .attr('height', '32')
+         .attr('xlink:href', './logo_face.png');
+
+
+  var data = [100, 150, 200, 250, 300, 350, 400];
     
-  // var asteroid = svg.selectAll('image')
-  //   .data(data)
-  //   .enter()
-  //   .append('image')
-  //   .attr('class', 'asteroid')
-  //   .attr('height', '50px')
-  //   .attr('width', '50px')
-  //   .attr('r', '25')
-  //   .attr('xlink:href', './asteroid.png')
-  //   .attr('x', function(d) {
-  //     var x = Math.random() * 400;
-  //     return x + 'px';
-  //   })
-  //   .attr('y', function(d) {
-  //     var y = Math.random() * 400;
-  //     return y + 'px';
-  //   })
-  //   .text(function(d) {
-  //     return d;
-  //   });
-
-
   var asteroid = svg.selectAll('circle')
     .data(data)
     .enter()
@@ -67,6 +67,8 @@
       return d;
     })
     .attr('r', '15')
+    // .attr('stroke', 'white')
+    //      .attr('stroke-width', '3');
   //  .attr('xlink:href', './asteroid.png')
  //   .attr('x', function(d) {
  //     var x = Math.random() * 400;
@@ -77,7 +79,8 @@
    //   return y + 'px';
   //  })
     //.style('fill', 'red');
-    .style('fill', 'url(#image)');
+    .style('fill', 'url(#image)')
+    .attr('class', 'spin');
 
   var drag = d3.behavior.drag()
     .on('drag', function() {
@@ -98,7 +101,10 @@
     .attr('r', '15')
    // .attr('xlink:href', './rocket.jpg')
     .call(drag)
-    .style('fill', 'white');
+    //.style('fill', 'white');
+    .style('fill', 'url(#image2)')
+    .attr('stroke', 'white')
+    .attr('stroke-width', '1.5');
 
 
   var scoreElement = d3.select('.spancurr')
@@ -142,11 +148,11 @@
       .transition()
       .duration(1200)
       .attr('cx', function(d) {
-        var x = Math.random() * 400;
+        var x = Math.random() * 500;
         return x;
       })
       .attr('cy', function(d) {
-        var y = Math.random() * 400;
+        var y = Math.random() * 500;
         return y;
       })
       .attr('r', '15')
@@ -179,8 +185,8 @@
 
   var collision = function(thisCircle, otherCircle) {
     gameOver = true;
-    //collisions += 1;
-    //collisionElement.text(collisions);
+    collisions += 1;
+    collisionElement.text(collisions);
     console.log('Collision at: ' + thisCircle.attr('cx') + ',' + thisCircle.attr('cy'));
   };
 
@@ -192,8 +198,8 @@
       } else {
         if (currScore > highScore) {
           highScore = currScore;
-          collisions += 1;
-          collisionElement.text(collisions);
+          //collisions += 1;
+          //collisionElement.text(collisions);
           highScoreElement.text(highScore);
         }
         currScore = 0;

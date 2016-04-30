@@ -8,3 +8,7 @@ svg .asteroid {
   height: 50px;
   width: 50px;
 }
+
+.spin {
+  @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } };
+}
